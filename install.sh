@@ -2,11 +2,11 @@
 
 pkg update -y
 pkg upgrade -y
-
+pkg install sox -y
 # Installation des outils de base avec vérification
 echo -e "\033[1;34m> Installation de Python...\033[0m"
 pkg install python -y || { echo -e "\033[1;31mErreur: Python n'a pas pu être installé !\033[0m"; exit 1; }
-
+pip install gtts
 echo -e "\033[1;36m> Installation de Git...\033[0m"
 pkg install git -y || { echo -e "\033[1;31mErreur: Git n'a pas pu être installé !\033[0m"; exit 1; }
 
@@ -19,7 +19,7 @@ echo -e "\033[1;33m> Autorisation de stockage...\033[0m"
 termux-setup-storage
 
 # Liste des modules Python à installer avec versions compatibles
-MODULES="telethon rich pillow==10.3.0 termcolor requests instagrapi<2"
+MODULES="telethon rich pillow==10.3.0 termcolor requests instagrapi==2.0.0"
 FAILED_MODULES=()
 SUCCESS_MODULES=()
 
@@ -66,7 +66,6 @@ else
 from rich.console import Console
 console = Console()
 console.print("\n[bold yellow]Installation terminée. Les modules suivants n'ont pas pu être importés :[/bold yellow]")
-console.print("[bold red]${FAILED_MODULES[@]}[/bold red]\n")
 END
 fi
 
